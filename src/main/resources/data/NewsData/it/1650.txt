@@ -1,0 +1,25 @@
+广受赞誉的Radeon Software Crimson ReLive驱动程序是AMD发布的第三款年度Radeon软件版本，也是我们颇受欢迎的软件版本，获得惊人的媒体评测数量，用户满意度达到90%。Radeon Software Crimson ReLive驱动程序优化AMD GPU性能、可靠性和可用性，实现更逼真的游戏性，并显着提高Radeon GPU硬件效能。
+
+Crimson ReLive驱动程序引入了Radeon Chill，这是一种全新软件驱动方法，可提高GPU效率，让网咖业主每年节省能源成本1高达3256人民币。
+
+Radeon Chill是为Radeon™显卡设计的智能节能功能，可根据玩家游戏活动和动作动态调节帧速率。 在动作切换强烈的游戏操作中，Radeon Chill让Radeon™显卡全速运行，提供高帧速率。 随着运动减少，Radeon Chill降低游戏帧速率，这可以降低操作温度和延长电池寿命，并降低能耗成本。 简而言之，Radeon Chill在游戏需要时提高了图形性能，并且在不需要时优化了节能效果。
+
+Radeon Chill软件监控用户输入，以确定游戏过程中屏幕上快速移动时间。 当游戏中角色停止移动并且整体游戏画面相对静止时，Radeon Chill会快速降低帧速率以节省功耗。 当游戏中的角色或场景中的其他物体开始移动或交互时，Radeon Chill瞬时增加帧速率来做出响应，以实现高度的游戏响应性并保持流畅运动感。 Radeon Chill算法运行快如闪电，避免对游戏体验造成任何明显的负面影响，所以玩家在游戏过程中不会注意到性能有任何变化。
+
+游戏玩家欢迎降低功耗，但和每月电费相比，他们通常更关心如何减少发热，提升散热效能和降低风扇噪音。 然而，驱动数十台高性能游戏PC产生的高供电成本是今天网咖业主面临的一大问题。
+
+降低GPU温度也会降低PC冷却和空调成本，这可以使网咖客户更加舒适，提升网咖留客时间以及游戏运行时间。 除了优化帧速率和降低GPU功耗之外，Radeon Chill专门设计以避免明显改变游戏体验。 启用和禁用Radeon Chill盲测显示，用户游戏体验感觉相同，并未改变。
+
+网咖业主可以根据客户需要调整Radeon Chill设置。 默认值为40-144Hz，Radeon Chill最小每秒帧数阈值可以设置为30Hz，最大值为300Hz。 用户自定义的热键允许在游戏过程中快速更改Radeon Chill设置，使网咖业主能够轻松地更改设置，实现独特的游戏体验。
+
+Radeon Chill为这些游戏提供良好用户体验，但并不是每个游戏都能与当前的Radeon Chill软件算法无缝兼容。Radeon Chill目前支持DirectX®9、10和11游戏，目前不支持OpenGL®，DirectX®12或Vulkan™游戏。
+
+Radeon Chill未来预计将支持更广泛的游戏和API，并使用户在每个游戏当中都可以启用或者停用Radeon Chill。Radeon Software Crimson ReLive驱动程序和Radeon Chill等革命性的新功能，深入挖掘AMD新一代GPU全部潜能，开创软件调教能效新时代，使用户无需高电费成本，即可够享受高性能游戏体验。
+
+1.中型网咖拥有60台PC，每天工作12小时，每度电价格为人民币4.83元，以运行魔兽世界为例，在关闭Radeon Chill情况下，典型的平均每日能源成本为84.0瓦，在开启Radeon Chill情况下，典型的平均每日能源成本为66.3瓦，节省了 17.7瓦，因此业者每年可望节省4651 度电，相当于3256人民币。 RS-114
+
+2.GPU封装功率是指传送到GPU封装、GPU芯片和基板的功率量。 由AMD 性能实验室于2017年1月12日对XFX Radeon RX 470D 4GB显卡进行测试，测试系统配置包括Intel i7 6700K CPU（4.0 GHz），16GB DDR4-2666 MHz内存，Radeon Software Crimson ReLive 16.12.2版驱动程和Windows 10 x64操作系统，测试使用魔兽世界第10级图形预设，开启或者关闭Radeon Chill。 PC制造商可能会改变配置，产生不同的结果。在1920x1080分辨率，Radeon Software Crimson ReLive 16.12.2驱动程序和XFX Radeon RX 470D 4GB显卡运行魔兽世界，Radeon Chill 关闭得分84.0瓦，Radeon Chill 打开得分66.3瓦，平均GPU封装功率降低21%。性能可能因最终驱动程序版本不同而不同。RS-115
+
+3.由AMD 性能实验室于2017年1月12日对XFX Radeon RX 470D 4GB显卡进行测试，测试系统配置包括Intel i7 6700K CPU（4.0 GHz），16GB DDR4-2666 MHz内存，Radeon Software Crimson ReLive 16.12.2版驱动程和Windows 10 x64操作系统，测试使用魔兽世界第10级图形预设，开启或者关闭Radeon Chill。 PC制造商可能会改变配置，产生不同的结果。 在1920x1080分辨率，Radeon Software Crimson ReLive 16.12.2驱动程序和XFX Radeon RX 470D 4GB显卡运行魔兽世界，Radeon Chill 关闭得分76.6摄氏度，Radeon Chill 打开得分73度，GPU平均温度下降5%，性能可能因最终驱动程序版本不同而不同。RS-116
+
+4.由AMD 性能实验室于2017年1月12日对XFX Radeon RX 470D 4GB显卡进行测试，测试系统配置包括Intel i7 6700K CPU（4.0 GHz），16GB DDR4-2666 MHz内存，Radeon Software Crimson ReLive 16.12.2版驱动程和Windows 10 x64操作系统，测试使用魔兽世界第10级图形预设，开启或者关闭Radeon Chill。 PC制造商可能会改变配置，产生不同的结果。平均帧时间传送是GPU在渲染后显示图像所需的延迟。 Radeon Chill通过实时渲染帧来减少显示延迟。 在1920x1080分辨率，Radeon Software Crimson ReLive 16.12.2驱动程序和XFX Radeon RX 470D 4GB显卡运行魔兽世界，Radeon Chill 关闭得分11.3毫秒，Radeon Chill 打开得分6.1毫秒，平均帧时间传送所需时间缩短46%，性能可能因最终驱动程序版本不同而不同。RS-117

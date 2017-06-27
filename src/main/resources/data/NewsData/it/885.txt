@@ -1,0 +1,27 @@
+在我们中国古代也有一位伟人——秦始皇，生就拥有统一天下的梦想。
+
+思想和思维的确能够改变命运，秦始皇如果穿越到今天，肯定也是一位好的工程师。
+
+拥有“统一天下的梦想”的工程师，肯定是一位合格的工程师，也是一名好的有潜力的工程师。
+
+除秦始皇外，还有谁有统一天下的梦想？答案就在那些拥有诸多“统一天下的梦想”工程师的做标准的一流公司中。
+
+我们希望这是一篇可以给您带来启迪的软文。
+
+四流企业做产品、三流企业卖技术、二流企业做品牌、一流企业定标准。而最牛的标准是什么？统一了其它标准的标准。最经典的案例是当年的惠普测试测量仪器部门（Keysight 是德科技的前身）推出的HPIB（即后来成为国际标准的GPIB）仪器程控接口，另一个是Intel和康柏、IBM、微软等公司联手推动USB规范。
+
+今天我们讨论的 Thunderbolt 3.0 仍和这个公司（英特尔和是德科技）有关系，Intel 是 Thunderbolt 总线的主要推手，Keysight则是Thunderbolt 3.0一致性测试规范中唯一指定的示波器供应商，拥有完整的Thunderbolt 3.0测试方案。
+
+在下面的视频中，Keysight 数字测试专家田志东就为大家演示了是德科技 Thunderbolt 3.0 Transmitter Test Setup —— Full Automation测量解决方案。
+
+实际演示中使用了 Infiniium V-Series Scope DSAV334A 33GHz示波器。所有的一致性操作只需要在 Thunderbolt 3.0 一致性测试软件上操作即可完成（视频中有详细的设计教程哟！）
+
+设置完成，即可开始 Thunderbolt 3.0 的一致性测试，测试完成后系统会自动生成测试报告，点击相关测试项，还可查看详细报告！
+
+最初，Thunderbolt 名为“Light Peak”，初衷是为了统一电脑上数量繁多性能参差不齐的接口，包括SCSI， SATA， USB， FireWire和 PCI Express。
+
+Thunderbolt 是苹果与英特尔（Intel）的合作产物，由Intel开发，通过和苹果的技术合作推向市场。Thunderbolt连接技术融合了PCI Express数据传输技术和DisplayPort显示技术，由一颗Intel专用控制芯片进行驱动，通过PCI Express x4、DisplayPort总线与系统芯片组相连。其中PCI Express用于数据传输，DisplayPort则用于显示信号传输，亦可通过直接连接英特尔处理器集成图形核心进行DisplayPort显示输出。
+
+Thunderbolt 到了3.0 ， 每条Lane 速率达20Gbps，两条Lane最大速率高达40Gbps，并且进一步归于统一，采用 Type C 接口，这给测试带来的很多问题，这也是为什么Thunderbolt 3.0 一致性测试规范到目前为止，推荐且仅推荐Keysight的磷化铟示波器。
+
+是德科技（NYSE：KEYS）-原安捷伦电子测量事业部，是全球电子测量技术和市场的领导者，致力于推动无线通信、模块化和软件解决方案的持续创新，专注于为客户提供卓越的测量体验。是德科技提供的电子测量仪器、系统、软件及服务广泛应用于电子设备的设计、研发、制造、安装、部署和运营。如欲了解是德科技的详细信息，请访问 www.keysight.com。

@@ -1,0 +1,33 @@
+2017 新智元开源·生态 AI 技术峰会 【倒计时 4 天，点击“阅读原文”抢票】新智元和行业领袖英特尔联合举办，中国 AI 2017 开年盛典启幕在即，三大亮点不容错过：① BAT 领衔，英特尔支持各路人工智能技术领袖齐聚，洞察中国 AI 军团布局；② 引爆 AI 原力， 现场参与 AI 技术论坛顶牛对撞；③人工智能创业家巨星璀璨，看投资领袖预测 谁将成为中国 AI 独角兽。
+
+【新智元导读】何凯明（Kaiming He）是 ResNet 作者之一、Facebook AI 实验室研究科学家。最近，他的最新研究成果Mask R-CNN公布，这是一个概念上简单，灵活，而且通用的对象实例分割框架，在 COCO 的实例分割，边界框对象检测，人物关键点检测 3个任务上均优于现有的单一模型。
+
+我们提出一个概念上简单，灵活，而且通用的对象实例分割框架（object instance segmentation）。我们的方法能有效检测图像中的对象，同时为每个实例生成高质量的分割掩膜（segmentation mask）。我们将该方法称为 Mask R-CNN，是在 Faster R-CNN 上的扩展，即在用于边界框识别的现有分支上添加一个并行的用于预测对象掩膜（object mask）的分支。
+
+Mask R-CNN 的训练简单，仅比 Faster R-CNN 多一点系统开销，运行速度是 5 fps。此外，Mask R-CNN很容易推广到其他任务，例如可以用于在同一个框架中判断人的姿势。我们在 COCO 竞赛的3个任务上都得到最佳结果，包括实例分割，边界框对象检测，以及人物关键点检测。没有使用其他技巧，Mask R-CNN 在每个任务上都优于现有的单一模型，包括优于 COCO 2016 竞赛的获胜模型。我们希望这个简单而有效的方法将成为一个可靠的基准，有助于未来的实例层面识别的研究。我们将会公开相关代码。
+
+Mask R-CNN 在概念上是简单的：Faster R-CNN 对每个候选对象有两个输出，即一个类标签和一个边界框偏移值。我们在 Faster R-CNN 上添加了第三个分支，即输出对象掩膜（object mask）。因此，Mask R-CNN 是一种自然而且直观的想法。但添加的 mask 输出与类输出和边界框输出不同，需要提取对象的更精细的空间布局。Mask R-CNN 的关键要素包括 pixel-to-pixel 对齐，这是 Fast/Faster R-CNN 主要缺失的一块。
+
+图2：在 COCO 测试集上的 Mask R-CNN 的结果。这些结果基于 ResNet-101，实现了 35.7 的 mask AP，运行速度是 5 fps。图中，掩膜（mask）用彩色显示，也显示了边界框，类标签和置信度。
+
+图3：Head 架构：我们扩展了两个已有的 Faster R-CNN 的头（head）。左图和右图分别展示了 ResNet C4 和 FPN 主干的 head。可以看到上面增加了一个 mask 分支。图中的数字表示空间分辨率和信道，箭头表示卷积（conv），去卷积（deconv）或全连接层（fc）。
+
+我们对 Mask R-CNN 和当前 state-of-the-art 的框架进行了全面的比较。所有实验都使用 COCO 数据集。我们使用标准 COCO 指标，包括 AP（超过 IoU 阈值的平均值），AP50，AP75 和 APS，APM，APL（不同规模的 AP）。除非另有说明，AP 使用 mask loU 进行评估。
+
+我们将 Mask R-CNN 与表1中的在实例分割任务上是 state-of-the-art 的方法进行比较。我们的模型的所有实例表现都优于这些模型的基线变体。包括 MNC 和 FCIS，这两个模型分别是COCO 2015 和 2016 竞赛中分割任务的冠军。
+
+Mask R-CNN 的输出结果显示在图 2 和 图 4。可以看到，Mask R-CNN 即使在有挑战性的条件上也获得了良好的效果。图 5 比较了我们的 Mask R-CNN 基线和 FCIS +++。 FCIS +++ 在重叠的实例上显示出系统的伪影（artifacts），表明它在实例分割的这个根本难题上受到挑战。Mask R-CNN 没有显示出那样的伪影。
+
+图5：FCIS +++（上）vs. Mask R-CNN（下，ResNet-101-FPN）。FCIS 在面对重叠对象时显示出系统的伪影。
+
+表2：Mask R-CNN 的 ablation。在 trainval35k 上训练，在 minival 上测试，并报告了 mask AP，除非另有说明。
+
+我们将 Mask R-CNN 与表3中的当前 state-of-the-art 的 COCO 边界框对象检测模型进行比较。结果显示，即使被训练的是完整的 Mask R-CNN 模型，也只有分类输出和边界框输出被用于推理（mask 输出被忽略了）。使用 ResNet-101- FPN 的 Mask R-CNN 优于所有当前最先进模型的变体，包括 GRMI 的单模型变体，这是 COCO 2016 竞赛检测任务的冠军。 使用 ResNeXt-101-FPN，Mask R-CNN 进一步提升了结果。
+
+表3：在 test-dev 上对象检测的单模型结果（边界框 AP），vs 当前最优模型。
+
+我们的框架可以很方便地扩展用于人体姿势估计（Human Pose Estimation）。我们将关键点的位置建模为 one-hot mask，采用 Mask R-CNN 来预测每个 K 关键点类型（例如左肩，右肘）的 K mask。这个任务证明了 Mask R-CNN 的灵活性。
+
+图6：使用 Mask R-CNN（ResNet-50-FPN）在 COCO 测试集上的关键点检测结果，具有同一个模型预测的人物分割掩膜。该模型实现了 63.1 的关键点 AP，运行速度为 5 fps。
+
+鉴于 Mask R-CNN 在提取对象边界框，掩膜，以及关键点上都有效，我们期待它成为其他实例层面任务的有效框架。

@@ -1,0 +1,53 @@
+导读：对于从PHP转到Node.js的作者而言，Node.js编辑完代码后必须重启真是件麻烦事。在不重启情况下热更新Node.js代码，是本文重要讨论的话题。而解决该问题，Java的引用成为了关键。层层剖析，抽丝剥茧，带你了解问题本质及解决之道。
+
+早期学习Node.js的时候，有挺多是从PHP转过来的，当时有部分人对于Node.js编辑完代码需要重启一下表示麻烦（PHP不需要这个过程），于是社区里的朋友就开始提倡使用node-supervisor这个模块来启动项目，可以编辑完代码之后自动重启。不过相对于PHP而言依旧不够方便，因为Node.js在重启以后，之前的上下文都丢失了。
+
+虽然可以通过将session数据保存在数据库或者缓存中来减少重启过程中的数据丢失，不过如果是在生产的情况下，更新代码的重启间隙是没法处理请求的（PHP可以，另外那个时候还没有cluster）。由于这方面的问题，加上本人是从PHP转到Node.js的，于是从那时开始思考，有没有办法可以在不重启的情况下热更新Node.js的代码。
+
+最开始把目光瞄向了require这个模块。想法很简单，因为Node.js中引入一个模块都是通过require这个方法加载的。于是就开始思考require能不能在更新代码之后再次require一下。尝试如下：
+
+两个JS文件写好之后，从a.js启动，刷新页面会输出b.js中的1024，然后修改b.js文件中导出的值，例如修改为2048。再次刷新页面依旧是原本的1024。
+
+再次执行一次require并没有刷新代码。require在执行的过程中加载完代码之后会把模块导出的数据放在require.cache中。require.cache是一个{}对象，以模块的绝对路径为key，该模块的详细数据为value。于是便开始做如下尝试：
+
+再次require之前，将require之上关于该模块的cache清理掉后，用之前的方法再次测试。结果发现，可以成功的刷新b.js的代码，输出新修改的值。
+
+了解到这个点后，就想通过该原理实现一个无重启热更新版本的node-supervisor。在封装模块的过程中，出于情怀的原因，考虑提供一个类似PHP中include的函数来代替require去引入一个模块。实际内部依旧是使用require去加载。以b.js为例，原本的写法改为var b = include(‘./b’)，在文件b.js更新之后include内部可以自动刷新，让外面拿到最新的代码。
+
+但是实际的开发过程中，这样很快就碰到了问题。我们希望的代码可能是这样：
+
+但按照这个目标封装include的时候，我们发现了问题。无论我们在include.js内部中如何实现，都不能像开始那样拿到新的b.num。
+
+对比开始的代码，我们发现问题出在少了b = xx。也就是说这样写才可以：
+
+修改成这样，就可以保证每次能可以正确的刷新到最新的代码，并且不用重启实例了。读者有兴趣的可以研究这个include是怎么实现的，本文就不深入讨论了，因为这个技巧使用度不高，写起起来不是很优雅[1]，反而这其中有一个更重要的问题————Java的引用。
+
+Java的引用与传统引用的区别
+
+要讨论这个问题，我们首先要了解Java的引用于其他语言中的一个区别，在C++中引用可以直接修改外部的值：
+
+varobj = { name: 'Alan'}; functiontest1(obj){obj = { hello: 'world'}; // 试图修改外部obj}test1(obj);console.log(obj); // { name: 'Alan' } // 并没有修改①functiontest2(obj){obj.name = 'world'; // 根据该对象修改其上的属性}test2(obj);console.log(obj); // { name: 'world' } // 修改成功②
+
+我们发现与C++不同，根据上面代码①可知Java中并没有传递一个引用，而是拷贝了一个新的变量，即值传递。根据②可知拷贝的这个变量是一个可以访问到对象属性的“引用”（与传统的C++的引用不同，下文中提到的Java的引用都是这种特别的引用）。这里需要总结一个绕口的结论：Java中均是值传递，对象在传递的过程中是拷贝了一份新的引用。
+
+varobj = { data: {}};// data指向 obj.datavardata= obj.data;console.log( data=== obj.data); // true-->data所操作的就是obj.datadata.name = 'Alan';data.test = function (){ console.log('hi')};// 通过 data可以直接修改到data的值console.log(obj) // { data: { name: 'Alan', test: [Function] }}data= { name: 'Bob', add: function(a, b) { returna+ b; }};// data是一个引用，直接赋值给它，只是让这个变量等于另外一个引用，并不会修改到obj本身console.log( data); // { name: 'Bob', add: [Function] }console.log(obj); // { data: { name: 'Alan', test: [Function] }}obj. data= { name: 'Bob', add: function(a, b) { returna+ b; }};// 而通过obj. data才能真正修改到data本身console.log(obj); // { data: { name: 'Bob', add: [Function] }}
+
+通过这个例子我们可以看到，data虽然像一个引用一样指向了obj.data，并且通过data可以访问到obj.data上的属性。但是由于Java值传递的特性直接修改data = xxx并不会使得obj.data = xxx。
+
+打个比方最初设置var data = obj.data的时候，内存中的情况大概是：
+
+然后设置data = xxx，由于data是拷贝的一个新的值，只是这个值是一个引用（指向内存1）罢了。让它等于另外一个对象就好比：
+
+让data指向了新的一块内存2。
+
+如果是传统的引用（如上文中提到的C++的引用），那么obj.data本身会变成新的内存2，但Java中均是值传递，对象在传递的过程中拷贝了一份新的引用。所以这个新拷贝的变量被改变并不影响原本的对象。
+
+上述例子中的obj.data与data的关系，就是Node.js中的module.exports与exports之间的关系。让我们来看看Node.js中require一个文件时的实际结构：
+
+functionrequire(...) { varmodule= { exports: {} }; ((module, exports) => { //Node.js 中文件外部其实被包了一层自执行的函数 //这中间是你模块内部的代码. functionsome_func() {}; exports= some_func; //这样赋值,exports便不再指向module.exports//而module.exports依旧是{} module.exports= some_func; //这样设置才能修改到原本的exports})(module, module.exports); returnmodule.exports;}
+
+Node.js中的exports就是拷贝的一份module.exports的引用。通过exports可以修改Node.js当前文件导出的属性，但是不能修改当前模块本身。通过module.exports才可以修改到其本身。表现上来说：
+
+这是二者表现上的区别，其他方面用起来都没有差别。所以你现在应该知道写module.exports.xx = xxx;的人其实是多写了一个module.。
+
+为了再练习一下，我们在来看一个比较复杂的例子：

@@ -1,0 +1,57 @@
+【重要通知】2017 新智元开源·生态 AI 技术峰会 【倒计时 2 天，点击“阅读原文”抢票】新智元和行业领袖英特尔联合举办，中国 AI 2017 开年盛典启幕在即。新智元327技术峰会暨颁奖盛典现场一律凭活动行二维码入场，大会于3月27日 8:00 正式开始签到，8:50会议开始，现场座位紧张请提前签到入场。活动行在大会现场设有咨询席位，但提前换二维码节省签到时间。请团购注册的公司关注，务必提醒参会的同事们手机接收二维码，如果不清晰可以打印出来，现场在签到处换领大会嘉宾胸卡。
+
+【新智元导读】本文来自PaddlePaddle团队，介绍了PaddlePaddle与众不同的基于Docker的编译、开发、测试、调试、发布、部署、和运行的全流程及其背后的设计思路。
+
+继两周前PaddlePaddle社区发布新的PythonAPI之后，最近又发布了对应的新版Docker镜像，并优化了镜像的体积和组织方式。
+
+这些工作的目的是方便大家在单机和Kubernetes机群上运行分布式深度学习作业。当Baidu Research官方Twitter账号发布这条消息并且被Andrew Ng转发后，收到了很多反馈。其中有朋友们好奇Docker在AI中的应用是不是“overkill”。其实这些工作都是为了简化用户需要做的操作。只是Docker在AI系统中的应用还刚刚开始，大家可能还不熟悉，所以我们写作本文，介绍PaddlePaddle与众不同的基于Docker的编译、开发、测试、调试、发布、部署、和运行的全流程及其背后的设计思路。
+
+除了PaddlePaddle本身，基于它开发的Deep Learning入门教材也是基于Docker image 的形式发布的。这本书中的每一章都是一个Jupyter Notebook。而Docker image里包括了Jupyter server、PaddlePaddle和所有被依赖的软件，所以大家不需要安装软件即可运行和浏览这本书，修改文中的例子程序并且执行和观察变化。
+
+引入Docker也使得我们不需要修改PaddlePaddle的源码即可同时支持多种操作系统 -- Linux、Mac、Windows -- 因为这些操作系统都可以运行Docker了。
+
+而且PaddlePaddle的开发环境（各种软件和配置）本身也被发布为一个Docker image，所以不仅是PaddlePaddle程序的用户、基于PaddlePaddle开发AI程序的用户，甚至PaddlePaddle的开发者，也都使用Docker container来开发和调试。
+
+如果不希望使用Docker运行Paddle应用，用户可以使用开发环境镜像快速编译Paddle的.deb安装包，直接安装在企业的特定运行环境中运行！
+
+《Deep Leanring 101》这本书是在Github社区里开发的一个PaddlePaddle应用程序。让我们先从这本书开始，解释PaddlePaddle应用开发和发布的过程吧。
+
+因为PaddlePaddle社区已经把书籍的Docker镜像发布到了dockerhub.com，所以大家只需要执行一条命令即可运行这本书：
+
+如果从国内访问dockerhub.com速度慢，也可以访问PaddlePaddle社区在香港维护的Docker registry 服务：
+
+随后只需要在浏览器打开链接 http://localhost:8888，选择一个感兴趣的章节，即可在浏览器里阅读书籍。界面如下图所以。用户可以点击上方工具栏的“运行”按钮来运行样例代码，查看输出的结果，并对照书籍开始学习，体验Paddle带来的深度学习之旅。
+
+如果大家好奇这本书的Docker镜像的创建方法，可以参见这个脚本程序 https://github.com/PaddlePaddle/book/blob/develop/.tools/build_docker.sh，并参见下文。大家可以把自己基于PaddlePaddle开发的应用发布出来，便于用户在单机和Kubernetes机群上运行。
+
+上述书籍镜像都是基于PaddlePaddle的生产环境镜像（production iamge）构建的。生产环境镜像是任何PaddlePaddle应用镜像的基础，其中只包括build好的PaddlePaddle以及Python等必要的依赖，这样使其体积尽量小。目前PaddlePaddle社区维护以下四种生产镜像，分别对应包括不同CPU和GPU指令集的程序。
+
+其中GPU版本镜像由于包含CUDA driver，体积会略大于纯CPU版本的镜像。而no-AVX镜像则提供可以兼容部分较早型号的不支持AVX指令集的CPU。也有一些云服务提供商提供的虚拟机不支持AVX指令集。
+
+我们可以执行生产镜像，利用其中编译好的PaddlePaddle来执行我们的应用程序：
+
+这个例子里，/work目录为保存run.py文件的目录，run.py程序和其依赖以及数据都会放在这个目录下，通过-v参数挂载到容器中，运行run.py即可启动我们的训练任务。
+
+对于更加复杂的深度学习应用，比如应用可能依赖官方Docker镜像之外的库，用户可以直接基于PaddlePaddle 的生产环境镜像打包自己的应用，创建如下的Dockerfile:
+
+使用诸如此类的Dockerfile即可根据用户的需要构建自己的镜像并应用于实际生产环境。
+
+我们将PaddlePaddle的Docker镜像区分为生产环境和开发环境。生产环境仅包含应用运行必要的动态连接库，三方库和应用二进制文件；而开发环境则需要提供Paddle源代码、头文件、编译工具以及丰富的开发工具，包括：
+
+开发环境镜像会极大的方便以下角色的工作： 1. 深度学习应用开发者：不再需要安装配置一台Ubuntu Linux机器并安装大量的依赖，只需要安装Docker。这样开发者可以使用自己的电脑或者远程的开发服务器都可以。 2. Paddle版本发布工程师：Paddle后续的版本发布更新均使用开发环境Docker镜像，根据Paddle的github分支／标签直接生成多个Paddle生产环境Docker镜像 3. 文档编写／Paddle网站更新：Paddle的文档通常是以“.md/.rst”格式保存在github上的，并随着源代码的更新而更新。文档和网站内容都是通过github的这些文档生成的，开发环境镜像会提供相应的工具，将“.md/.rst”格式解压、转换并生成html页面。
+
+下面介绍如何使用开发环境镜像。考虑我们完成日常工作的方式，开发者可能会使用自己的笔记本／台式机／安装有GPU的工作站：
+
+许多开发者会使用一台远程的安装了GPU的机器完成日常的开发工作，他们通常会ssh登录到这台服务器上开发。开发环境镜像也提供了sshd服务，这样开发者可以直接ssh登录到PaddlePaddle的开发环境容器中启动训练任务：
+
+一个基本思路是: 使用git clone下载PaddlePaddle源码到开发机或本地，然后就可以使用自己惯用的编辑器（如Eclipse／VIM）开始代码编写工作。编译和测试则可以使用docker run -v挂载Paddle源代码目录到Docker开发环境镜像。这样就可以在Docker容器中直接编译和测试刚才修改的代码：
+
+您可以使用下面的命令快速下载并启动一个PaddlePaddle开发环境的容器，并启动一个sshd服务。在 https://hub.docker.com/r/paddlepaddle/paddle/tags/找到您需要的版本替换 <version>。
+
+PaddlePaddle团队将以易用性为目标，持续更新，为AI从业者和对深度学习感兴趣的同学提供更方便的镜像和工具，把深度学习带给更多的人！
+
+PaddlePaddle是一个最早由百度科学家和工程师共同研发的并行分布式深度学习平台，兼备易用性、高效性、灵活性和可扩展性，目前已被百度内部多个产品线广泛使用。
+
+PaddlePaddle目前已经开放源码, 但是远未完善，我们希望能在这个基础上不断的改进、扩展和延伸。 同时我们希望广大开发者积极提供反馈和贡献源代码，建立一个活跃的开源社区。
+
+据介绍，PaddlePaddle是一个小而美的团队、核心成员10人左右、系统工程师为主、全部使用Github办公。

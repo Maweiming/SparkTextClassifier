@@ -1,0 +1,29 @@
+在最近的FPGA国际研讨会(ISFPGA)上，英特尔加速器架构实验室(AAL)的Eriko Nurvitadhi博士，发表题为《Can FPGAs beat GPUs in Accelerating Next-Generation Deep Neural Networks》的报告，分享了英特尔的最新研究。
+
+这一研究，主要评估在DNN(深度神经网络)算法领域，两代英特尔FPGA(Intel Arria10和Intel Stratix 10)，与NVIDIA TITAN X Pascal GPU相比性能如何。
+
+英特尔表示在应用领域，FPGA在DNN研究中表现非常出色，可用于需要分析大量数据的AI、大数据或机器学习等领域。使用经修剪或紧凑的数据类型与全32位浮点数据（FP32）时，测试的Intel Stratix 10 FPGA的性能优于GPU。
+
+除了性能外，FPGA还具有强大的功能，因为它们具有适应性，通过重用现有的芯片可以轻松实现更改，从而让团队在六个月内从一个想法进入原型。
+
+硬件：与高端GPU相比，FPGA具有卓越的能源效率（性能/瓦特），但还有不被熟知的高峰值浮点性能。FPGA技术正在迅速发展。即将推出的英特尔Stratix 10 FPGA提供超过5,000个硬件浮点单元(DSP)，超过28MB的片上RAM(M20K)，与高带宽内存等特性。
+
+基于14nm工艺的英特尔Stratix 10在FP32吞吐量方面达到峰值9.2TFLOP/s。相比之下，最新的Titan X Pascal GPU的FP32吞吐量为11TFLOP/s。
+
+新兴的DNN算法：更深的网络提高了精度，但是大大增加了参数和模型大小。这增加了对计算、带宽和存储的需求。因此，新兴趋势是采用紧凑型低精度数据类型，远低于32位。16位和8位数据类型正在成为新常态，也得到DNN软件框架（例如TensorFlow）的支持。
+
+新兴的低精度和稀疏DNN算法比传统的密集FP32 DNN提供了数量级的算法效率改进，但是它们引入了难以处理的不规则并行度和定制数据类型。这时FPGA的优势就体现出来了。这种趋势使未来FPGA成为运行DNN，AI和ML应用的可行平台。
+
+矩阵乘法（GEMM）测试的结果。GEMM是DNN中的关键操作，上述四个不同类型的测试表明，除了在FP32 Dense GEMM测试中，Stratix 10与TITAN X仍有差距。另外三项测试中新一代英特尔FPGA的表现都优于GPU。
+
+三进制DNN最近提出约束神经网络权重为+1,0或-1。这允许稀疏的2位权重，并用符号位操作代替乘法。与许多其他低精度和稀疏的DNN不同，三元DNN可以提供与现有技术DNN（即ResNet）相当的精度。
+
+上图右半部分，显示了英特尔Stratix 10 FPGA和TITAN X GPU的ResNet-50的性能和性能/功耗比。即使对于保守的性能估计，英特尔Stratix 10 FPGA已经比实现了TITAN X GPU性能提高了约60％。在性能/功耗比方面，英特尔Stratix 10比TITAN X要好2.3倍到4.3倍。
+
+当下一代DNN到来时，FPGA的表现能否击败GPU？英特尔对比两代FPGA以及最新的TITAN X GPU，结果显示目前DNN算法的趋势可能有利于FPGA。
+
+再说一次，这个研究报告出自英特尔，这个研究团队还指出，除了DNN之外，FPGA在其他不规则应用程序以及延迟敏感程序（如ADAS）等领域也有机会。
+
+欢迎加量子位小助手的微信：qbitbot，如果你研究或者从事AI领域，小助手会把你带入量子位的交流群里。
+
+在量子位（QbitAI）公众号会话界面回复“ 今天”，看我们全网搜罗的AI新鲜资讯。比心❤~

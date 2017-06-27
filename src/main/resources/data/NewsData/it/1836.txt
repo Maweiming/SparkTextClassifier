@@ -1,0 +1,43 @@
+相信，吴恩达（Andrew Ng）已经成为众多科技媒体的头条了。他的名字已经成为了twitter的热搜关键词，那篇离职文也被转发了1千多次。
+
+百度股票今日表现如何？小探也瞄了一眼，嗯，下跌了一点点。
+
+言归正传，到底吴恩达 (Andrew Ng) 是一个怎样的人？他会不会去传说中妻子的公司Drive.ai？小探今天请到了密探主笔严肃和圈内人士来说说。
+
+吴恩达是斯坦福计算机系的副教授，师从机器学习的大师级人物 Michael I. Jordan。（可不是篮球运动员乔丹啊……）
+
+（这是2016年4月美国艾伦人工智能研究院（AI2）名叫Semantic Scholar的程序基于400万份计算机领域的论文，计算出的最有影响力计算机学者排名。其中第一名就是吴恩达的导师Michael Jordan。）
+
+吴恩达的同门师兄弟包括Zoubin Ghahramani，Tommi Jaakkola，Eric Xing，David Blei，徒子徒孙遍布美国名校。他们这一大学派的主要研究和贡献集中在统计机器学习（Statistical Machine Learning）和图模型（Probabilistic Graphical model）。具体的比如 Spectral clustering, Nonparametric Bayesian Methods,Variational Methods等等。
+
+现在图模型和 Nonparametric Bayesian Methods 都是机器学习领域炙手可热的研究方向。Michael Jordan的研究很好的将统计和机器学习联系了起来，将Variational Methods发扬光大，他也还身兼统计系和计算机系教职。
+
+吴恩达的学术研究兴趣比较广(andrew Y ng - Google Scholar Citations)，做的东西有比较理论的，但更多的是理论和应用的结合。
+
+他的一作主要集中在Spectral Clustering , Unsupervised Learning 和增强式学习(reinforcement learning)，机器学习的很多方面都有涉及，比如feature selection，over-fitting，policy search。
+
+由于做reinforcement learning和unsupervised learning，所以有很多项目是和机器人有关的，他也发起了ROS (Robot Operating System)，一个开源的机器人操作系统，影响力很大。
+
+其他的参与的研究就很多了，Michael Jordan那一片的统计机器学习都有参与，在图模型领域也有很多非常优秀论文，比如自然语言处理(NLP)的神器Latent Dirchirelnt Allocation(LDA) 那篇论文他也有贡献。
+
+吴恩达现在的研究兴趣主要是深度学习(Deep Learning)，深度学习说白了就是死灰复燃的神经网络(Neural Network)，神经网络的一代鼻祖是多伦多大学的Geoffrey Hinton。 Geoffrey Hinton和吴恩达一起在Google搞深度学习 (Google Brain Project)，他们俩现在在这一块的论文很多，影响力很大。
+
+总体而言，吴恩达是顶级的机器学习研究者。他在斯坦福是tenured professor(终身教职)已经说明了这点。至于实验室主任(Lab Director)和学术无关，只要是教授都可以成立一个实验室自己当主任(Director)，不要把主任拿过来说事。
+
+更重要的是，他在学术圈内圈外知名度很高！除了师承之外，还有一个重要原因是他在斯坦福公开课里面主讲机器学习，讲的的确是非常好，在工程界非常受欢迎。后来和Daphne Koller (机器学习界的一姐和大牛，《Probabilistic Graphical Models: Principles and Techniques》一书的作者)一起成立了Coursera。
+
+吴恩达对慕课(MOOC)和Coursera的贡献就不赘述了。
+
+另外吴恩达会说中文，出生于英国，高中毕业于新加坡的Raffles Insitution，本科毕业于卡耐基梅隆大学，硕士在麻省理工学院，博士毕业于加州大学伯克利分校，早年在香港和英国生活过（有没有觉得他说英语有怪怪的和英式英语混杂的感觉？）。
+
+吴恩达宣布从百度离职后，有一种猜测是，他是否会去妻子Carol Reiley所在的公司Drive.ai。其实，不仅仅是妻子，他的两个学生都是Drive.ai的联合创始人。
+
+其中，Tao Wang和Brody Huval 都是Drive.ai的联合创始人。究竟，吴恩达是否有可能投奔妻子而去呢？
+
+Carol Reiley曾接受媒体采访时表示，Drive.ai 聚焦在汽车的“大脑”，主要用深度学习技术来打造自动驾驶的人工智能系统，让计算机自己训练自己、做出正确的决定，而不是试着把所有做法都提前写在计算机里。Drive.ai 已经获得加州车辆管理局颁发的牌照、成为 Google、特斯拉、奔驰等无人车的同伴，被允许在加州的公共道路上进行自动驾驶测试。
+
+对此，小探咨询了无人车驾驶的业内人士，该人士表示吴恩达的妻子已经在自动驾驶领域成立公司，如果吴恩达也投入相关领域不太可能，这涉嫌同业竞争。
+
+对于吴恩达何去何从，该业内人士认为当前并不好判断。他举例，连Google的副总裁、曾经领导自动驾驶汽车的Sebastian Thrun都在进行deep learning皮肤癌的研究，可见，百花齐放是大有可能的。
+
+好啦，今天内容到这就要告一段落了。密探将会继续进行追踪，以上大部分内容出自严肃知乎问题回答：吴恩达 (Andrew Ng) 是一个怎样的人？欢迎大家在知乎关注硅谷密探专栏噢，或点击文末“阅读原文”进入。
