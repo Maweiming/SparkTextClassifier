@@ -3,7 +3,7 @@
     
 
 #### 0、DataFactory.java
-    0、读取 classPath -> data -> models -> NewsData 目录下的数据 （通过文件夹分类） 
+    0、读取 classPath -> data -> NewsData 目录下的数据 （通过文件夹分类） 
     1、把数据分词
     2、分割数据(分为测试数据和训练数据)
     3、写入数据到 classPath -> data 目录下的 data-test.txt 和 data-train.txt 文件中
