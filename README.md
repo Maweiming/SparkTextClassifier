@@ -1,7 +1,7 @@
 # SparkTextClassifier
     使用Spark NaiveBayes 实现中文文本分类
     测试数据是我们自己用爬虫抓取的，自己练手也可以用搜狗实验室的数据集（http://www.sogou.com/labs/resource/list_news.php）
-    朴素贝叶斯分类效果不是很好 数据量大的时候准确率差不多80%，有条件可以试试tensorflow的CNN+RNN+word2vec 我们线上的准确率98% 
+    朴素贝叶斯分类效果不是很好 数据量大的时候准确率差不多80%，有条件可以试试tensorflow用CNN+RNN+word2vec 我们线上的准确率98% 
  
 #### 0、DataFactory.java
     0、读取 classPath -> data -> NewsData 目录下的数据 （通过文件夹分类） 
