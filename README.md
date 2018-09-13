@@ -38,3 +38,13 @@
             ---tf              tf文件
             ---labels.txt      标签数据
                
+               
+测试集训练结果               
+=======================================================
+Summary
+-------------------------------------------------------
+Correctly Classified Instances          :      786	   98.7437%
+Incorrectly Classified Instances        :       10	    1.2563%
+Total Classified Instances              :      796
+===================================
+
