@@ -31,14 +31,16 @@ public class NaiveBayesTrain {
     }
 
     public static void main(String[] args) throws IOException {
+        if(null == System.getenv("HADOOP_HOME")){
+            new Exception("请安装并配置Hadoop环境").printStackTrace();
+        }
+        System.out.println();
         if(!new File(DataFactory.DATA_TRAIN_PATH).exists()){
             new Exception(DataFactory.DATA_TRAIN_PATH+" is not exists").printStackTrace();
             return;
         }
 
         SparkSession spark = SparkSession.builder().appName("NaiveBayes").master("local")
-                .config("spark.driver.memory", "1073741824")
-                .config("spark.testing.memory", "10073741824")
                 .getOrCreate();
 
         Dataset<Row> train = spark.read().json(DataFactory.DATA_TRAIN_PATH);

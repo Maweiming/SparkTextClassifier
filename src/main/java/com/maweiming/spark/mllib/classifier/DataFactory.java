@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +19,9 @@ import java.util.Map;
  */
 public class DataFactory {
 
-    public static final String CLASS_PATH = FileUtils.getClassPath();
+    public static final String CLASS_PATH = "E:\\MyCoders\\MyCoders\\SparkTextClassifier\\src\\main\\resources";
+
+    public static final String STOP_WORD_PATH = CLASS_PATH+"\\data\\stopWord.txt";
 
     public static final String NEWS_DATA_PATH = CLASS_PATH+"\\data\\NewsData";
 
@@ -26,17 +29,18 @@ public class DataFactory {
 
     public static final String DATA_TEST_PATH = CLASS_PATH+"\\data\\data-test.txt";
 
-    public static final String MODELS = CLASS_PATH+"\\data\\models";
+    public static final String MODELS = CLASS_PATH+"\\models";
 
-    public static final String MODEL_PATH = CLASS_PATH+"\\data\\models\\category-4";
+    public static final String MODEL_PATH = CLASS_PATH+"\\models\\category-4";
 
-    public static final String LABEL_PATH = CLASS_PATH+"\\data\\models\\labels.txt";
+    public static final String LABEL_PATH = CLASS_PATH+"\\models\\labels.txt";
 
-    public static final String TF_PATH = CLASS_PATH+"\\data\\models\\tf";
+    public static final String TF_PATH = CLASS_PATH+"\\models\\tf";
 
-    public static final String IDF_PATH = CLASS_PATH+"\\data\\models\\idf";
+    public static final String IDF_PATH = CLASS_PATH+"\\models\\idf";
 
     public static void main(String[] args) throws IOException {
+        List<String> stopWords = FileUtils.readLine(line -> line,STOP_WORD_PATH);
         File file = new File(MODELS);
         if(!file.exists()){
             file.mkdirs();
@@ -63,11 +67,12 @@ public class DataFactory {
             int spilt = Double.valueOf(fileNames.length*spiltRate).intValue();
             for(int i=0;i<fileNames.length;i++){
                 String fileName = fileNames[i];
-                String text = FileUtils.readFile(String.format("%s\\%s",fileDirPath,fileName));
-                text = text.replaceAll("\n","");
-                text = text.replaceAll("\t","");
-                text = text.replaceAll(" ","");
-                text = text.replaceAll("\\u0000","");
+                String filePath = String.format("%s\\%s", fileDirPath, fileName);
+                System.out.println(filePath);
+                String text = FileUtils.readFile(filePath);
+                for (String stopWord : stopWords) {
+                    text = text.replaceAll(stopWord,"");
+                }
 
                 if(StringUtils.isBlank(text)){
                     continue;
